@@ -1,0 +1,147 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4919,        137]
+NotebookOptionsPosition[      4609,        123]
+NotebookOutlinePosition[      4965,        139]
+CellTagsIndexPosition[      4922,        136]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"decrypt", "[", 
+   RowBox[{"keyword_", ",", "enc_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"map", "=", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{
+            RowBox[{"i", "+", "j"}], ",", "10"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "9", ",", "0", ",", 
+            RowBox[{"-", "1"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "0", ",", "9"}], "}"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"{", 
+          RowBox[{
+          "10", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", 
+           ",", "7", ",", "8", ",", "9"}], "}"}], "]"}], "]"}]}], ",", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"i", "=", 
+       RowBox[{"Flatten", "@", 
+        RowBox[{"IntegerDigits", "[", 
+         RowBox[{
+          RowBox[{"ToExpression", "[", 
+           RowBox[{"StringReplace", "[", 
+            RowBox[{"enc", ",", 
+             RowBox[{"Whitespace", "\[Rule]", "\"\<\>\""}]}], "]"}], "]"}], 
+          ",", "10"}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"k", "=", 
+       RowBox[{"Flatten", "@", 
+        RowBox[{"IntegerDigits", "[", 
+         RowBox[{
+          RowBox[{"ToCharacterCode", "[", 
+           RowBox[{"keyword", ",", "\"\<ASCII\>\""}], "]"}], "+", "100"}], 
+         "]"}]}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"li", "=", 
+         RowBox[{"Length", "[", "i", "]"}]}], ",", 
+        RowBox[{"lk", "=", 
+         RowBox[{"Length", "[", "k", "]"}]}]}], "\[IndentingNewLine]", "}"}], 
+      ",", "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{"newk", "=", 
+          RowBox[{"k", "[", 
+           RowBox[{"[", 
+            RowBox[{"Mod", "[", 
+             RowBox[{
+              RowBox[{"Range", "[", "li", "]"}], ",", "lk", ",", "1"}], "]"}],
+             "]"}], "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Module", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{"position", "=", 
+            RowBox[{"1", "+", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"newk", "[", 
+                  RowBox[{"[", "j", "]"}], "]"}], ",", 
+                 RowBox[{"i", "[", 
+                  RowBox[{"[", "j", "]"}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"j", ",", "1", ",", "li"}], "}"}]}], "]"}]}]}], 
+           "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"dnc", "=", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"map", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"First", "[", "#", "]"}], ",", 
+                 RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], "&"}], "/@",
+              "position"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"dnc1", "=", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"FromDigits", "[", "#", "]"}], "&"}], "/@", 
+             RowBox[{"Partition", "[", 
+              RowBox[{"dnc", ",", "3"}], "]"}]}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"outputdnc", "=", 
+            RowBox[{"FromCharacterCode", "[", 
+             RowBox[{"dnc1", "-", "100"}], "]"}]}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",\
+ExpressionUUID->"2977b5a2-6568-49f3-be63-b696fc2cc16e"]
+},
+WindowSize->{759, 833},
+WindowMargins->{{25, Automatic}, {Automatic, 31}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (2019\:5e745\:670818\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4047, 101, 738, "Input",ExpressionUUID->"2977b5a2-6568-49f3-be63-b696fc2cc16e"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
